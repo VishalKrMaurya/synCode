@@ -1,6 +1,6 @@
-# syncCode
+# synCode
 
-syncCode is a real-time collaborative code editor that allows multiple users to join a room, write code together, and see each other's changes instantly. Built with React, Node.js, Express, and Socket.IO, syncCode is perfect for remote interviews, coding sessions, pair programming, and learning environments.
+synCode is a real-time collaborative code editor that allows multiple users to join a room, write code together, and see each other's changes instantly. Built with React, Node.js, Express, and Socket.IO, synCode is perfect for remote interviews, coding sessions, pair programming, and learning environments.
 
 ## Features
 
@@ -29,8 +29,8 @@ syncCode is a real-time collaborative code editor that allows multiple users to 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/syncCode.git
-   cd syncCode
+   git clone https://github.com/yourusername/synCode.git
+   cd synCode
    ```
 
 2. **Install backend dependencies:**
