@@ -168,3 +168,17 @@ body {
   font-size: 20px;
   height: 200px;
 }
+
+.run-btn{
+  background-color: green;
+  color: rgba(255, 255, 255, 0.716);
+  padding: 10px;
+}
+
+.output-area{
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 20px;
+  height: 200px;
+}
