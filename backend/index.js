@@ -1,5 +1,7 @@
+const axios = require('axios');
 const express = require('express');
 const http = require('http');
+const { version } = require('os');
 const {Server} = require('socket.io');
 
 const app = express();
@@ -65,6 +67,25 @@ io.on("connection",(socket)=>{
 
     socket.on("languageChange",({roomId, language})=>{
         io.to(roomId).emit("languageUpdate", language);
+    })
+
+    socket.on("compilerCode", async({code, roomId, language, version})=>{
+        if(rooms.has(roomId)){
+            const room = rooms.get(roomId);
+            const response = await axios.post("https://emkc.org/api/v2/piston/execute",
+            {
+                language,
+                version,
+                files:[
+                    {
+                        content: code
+                    },
+                ]
+            })
+
+            room.output = response.data.run.output;
+            io.to(roomId).emit("codeResponse",response.data);
+        }
     })
 
     socket.on("disconnect",()=>{

@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import { useState } from 'react';
 import Editor from '@monaco-editor/react';
 
-const socket = io("http://localhost:5000")
+const socket = io("https://synccode-server.onrender.com")
 
 const App = () => {
 
@@ -28,7 +28,7 @@ const App = () => {
 
     socket.on("userTyping",(user)=>{
       setTyping(`${user.slice(0,8)}... is Typing`);
-      setTimeout(() => setTyping("") , 2000);
+      setTimeout(() => setTyping("") , 1000);
     })
 
     socket.on("languageUpdate",(newLanguage)=>{
@@ -97,7 +97,7 @@ const App = () => {
     return (
       <div className='join-container' >
         <div className="join-form">
-          <h1>Enter the Room ID</h1>
+          <h1>Enter Room ID</h1>
           <input type='text' placeholder='Room ID' value={roomId} onChange={(e)=> setRoomId(e.target.value)}/>
           <input type='text' placeholder='Username' value={userName} onChange={(e)=> setUserName(e.target.value)}/>
           <button onClick={joinRoom}> Join Room</button>
@@ -116,21 +116,25 @@ const App = () => {
           {copySuccess && <span className='copy-success'>{copySuccess}</span>}
         </div>
 
-        <h3>User in Room</h3>
-        <ul>
-          {users.map((user, index) =>{
-            return <li key={index}>{user.slice(0,8)}...</li>
-          })}
-        </ul>
-        <p className='typing-indicator'>{typing}</p>
-        <select className='language-selector' value={language} onChange={handleLanguageChange}>
-          <option value="javascript">JavaScript</option>
-          <option value="python">Python</option>
-          <option value="java">Java</option>
-          <option value="cpp">C++</option>
-        </select>
-
-        <button className='leave-button' onClick={leaveRoom}>Leave Room</button>
+        <div className='user-info'>
+          <h3>User in Room</h3>
+          <ul>
+            {users.map((user, index) =>{
+              return <li key={index}>{user.slice(0,8)}...</li>
+            })}
+          </ul>
+          <p className='typing-indicator'>{typing}</p>
+          <select className='language-selector' value={language} onChange={handleLanguageChange}>
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="cpp">C++</option>
+          </select>
+        </div>
+        
+        <div className='leave-info'>
+          <button className='leave-button' onClick={leaveRoom}>Leave Room</button>
+        </div>
       </div>
 
       <div className="editor-wrapper">
